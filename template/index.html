@@ -1,0 +1,33 @@
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+        <form action="{% url 'index' %}" method="post" class="search-form">
+          {% csrf_token %}
+          <div class="input-group">
+            <input type="text" class="form-control" name="city" id="locationInput" placeholder="Enter a city">
+            <div class="input-group-btn">
+              <button id="searchButton">Search</button>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          {% if data.country_code %}
+          <div class="weather-info">
+            <h1 class="city-name"  id="location">{{ city }}</h1>
+            <h3 class="country-code">Country Code: {{ data.country_code }}</h3>
+            <h5 class="coordinate">Coordinate: {{ data.coordinate }}</h5>
+            <h5 class="temperature" id="temperature">Temperature: {{ data.temp }}</h5>
+            <h5 class="pressure">Pressure: {{ data.pressure }}</h5>
+            <h5 class="humidity">Humidity: {{ data.humidity }}</h5>
+          </div>
+          {% endif %}
+        </div>
+    </div>
+</body>
